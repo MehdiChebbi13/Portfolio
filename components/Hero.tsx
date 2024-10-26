@@ -1,5 +1,6 @@
 import React from "react";
 import { Spotlight } from "./ui/Spotlight";
+import { TextGenerateEffect } from "./ui/TextGenerate";
 
 function Hero() {
   return (
@@ -29,6 +30,13 @@ function Hero() {
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
           <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
             Le portfolio officiel de Mehdi Chebbi
+          </p>
+          <TextGenerateEffect
+            words="Conception d'experience web modernes et performantes"
+            className="text-center text-[40px] md:text-5xl lg:text-6xl"
+          />
+          <p className="text-center md:tracking-wider my-4 text-sm md:text-lg lg:text-2xl">
+            Bonjour, Je suis Mehdi, developpeur js, situé Grand Tunis
           </p>
         </div>
       </div>
