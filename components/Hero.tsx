@@ -1,6 +1,8 @@
+import { FaLocationArrow } from "react-icons/fa6";
 import React from "react";
 import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerate";
+import MagicButton from "./ui/MagicButton";
 
 function Hero() {
   return (
@@ -39,6 +41,13 @@ function Hero() {
             Bonjour, Je suis Mehdi, developpeur js, situé
             <br /> Grand Tunis
           </p>
+          <a href="#about">
+            <MagicButton
+              title="Voir mes projets"
+              icon={<FaLocationArrow />}
+              position="right"
+            />
+          </a>
         </div>
       </div>
     </div>
