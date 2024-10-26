@@ -1,0 +1,37 @@
+/* Carousel Wrapper Styles */
+.carousel-wrapper {
+  border: 1px solid black;
+  height: 150px; /* Adjust height as needed */
+  margin: 0 auto;
+  position: relative;
+  margin-top: 2rem;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0),
+    rgba(0, 0, 0, 1) 20%,
+    rgba(0, 0, 0, 1) 80%,
+    rgba(0, 0, 0, 0)
+  );
+}
+
+/* Animation Keyframes */
+@keyframes scrollLeft {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Card Item Animation */
+.carousel-item {
+  width: 200px; /* Card width */
+  height: 100px; /* Card height */
+  background-color: #444;
+  border-radius: 5px;
+  position: absolute;
+  left: 100%;
+  animation-name: scrollLeft;
+  animation-duration: 10s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
