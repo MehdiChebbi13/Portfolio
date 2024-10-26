@@ -17,7 +17,7 @@ function Hero() {
         <Spotlight className="left-80 top-28 h-[80vh] w-[50vw]" fill="blue" />
       </div>
       <div
-        className="h-screen w-full dark:bg-black-100 bg-white dark:bg-grid-white/[0.03] bg-grid-black-100/[0.2]
+        className="h-screen w-full dark:bg-black-100 bg-white dark:bg-grid-white/[0.05] bg-grid-black-100/[0.2]
        absolute top-0 left-0 flex items-center justify-center"
       >
         <div
@@ -36,7 +36,8 @@ function Hero() {
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
           />
           <p className="text-center md:tracking-wider my-4 text-sm md:text-lg lg:text-2xl">
-            Bonjour, Je suis Mehdi, developpeur js, situé Grand Tunis
+            Bonjour, Je suis Mehdi, developpeur js, situé
+            <br /> Grand Tunis
           </p>
         </div>
       </div>
