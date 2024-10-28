@@ -147,9 +147,7 @@ const TechStack = () => {
   return (
     <div className="min-h-screen  text-white p-8">
       <div className="max-w-6xl mx-auto">
-        <p className="text-3xl md:tracking-wider font-bold mb-8">
-          Technologies que j&apos;utilise
-        </p>
+        <p className="heading mb-8">Technologies que j&apos;utilise</p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {technologies.map((tech, index) => (
