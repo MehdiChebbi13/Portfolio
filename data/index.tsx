@@ -9,7 +9,7 @@ export const cards = [
     title: "Dépôt de chèques en ligne",
     description: "Explore the wonders ",
     src: "/p1.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg", "/docker.svg"],
+    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg", "/dock.svg"],
     content: () => {
       return (
         <p>
@@ -41,7 +41,7 @@ export const cards = [
     title: "Remotini Application de Télétravail",
     description: "Simplify your video ",
     src: "/p2.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/stream.svg"],
+    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg"],
     content: () => {
       return (
         <p>
@@ -52,13 +52,11 @@ export const cards = [
           • Utilisation de TypeScript et React pour cr&eacute;er une interface
           utilisateur intuitive et r&eacute;active, offrant une
           exp&eacute;rience utilisateur am&eacute;lior&eacute;e. <br />
-          • Int&eacute;gration de biblioth&egrave;ques de streaming pour des
-          appels vid&eacute;o en temps r&eacute;el, assurant une communication
-          stable et de haute qualit&eacute; entre les utilisateurs. <br />
           • Mise en œuvre de Tailwind CSS pour la cr&eacute;ation d&apos;une
           interface moderne et adaptable aux diff&eacute;rents appareils. <br />
-          • Gestion des &eacute;tats et de la synchronisation en temps
-          r&eacute;el pour faciliter le travail collaboratif et productif.
+          • Tableau de bord avec statistiques en temps r&eacute;el, permettant
+          aux utilisateurs de suivre les performances de leur &eacute;quipe et
+          de g&eacute;rer efficacement les r&eacute;unions. <br />
         </p>
       );
     },
@@ -94,7 +92,7 @@ export const cards = [
     title: "8 Puzzle Solving Algorithm",
     description: "Recreated the Apple",
     src: "/p4.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
+    iconLists: ["/py.svg"],
     content: () => {
       return (
         <p>
