@@ -7,8 +7,8 @@ export const cards = [
   {
     id: 1,
     title: "Dépôt de chèques en ligne",
-    description: "Explore the wonders ",
-    src: "/p1.svg",
+    description: "Stage Abshore",
+    src: "https://utfs.io/f/TWbmQ35jWAGYgbjBS9xMm9YNyptv1VxOlT0wkqhLzZbausgn",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg", "/dock.svg"],
     content: () => {
       return (
@@ -39,8 +39,8 @@ export const cards = [
   {
     id: 2,
     title: "Remotini Application de Télétravail",
-    description: "Simplify your video ",
-    src: "/p2.svg",
+    description: "Projet Universitaire",
+    src: "https://utfs.io/f/TWbmQ35jWAGYM0PsDZF9R1a3ScVBnDK4vlxqXh2ebOfmCAPs",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg"],
     content: () => {
       return (
@@ -64,8 +64,8 @@ export const cards = [
   {
     id: 3,
     title: "Responsive GYM Website",
-    description: "A REAL Software",
-    src: "/p3.svg",
+    description: "Projet Personnel",
+    src: "https://utfs.io/f/TWbmQ35jWAGYnRZykrNMmNk15Whazl3iFf4T9RAY2gpLt0cH",
     iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg"],
     content: () => {
       return (
@@ -87,10 +87,10 @@ export const cards = [
       );
     },
   },
-  {
+  /* {
     id: 4,
     title: "8 Puzzle Solving Algorithm",
-    description: "Recreated the Apple",
+    description: "Projet Personnel",
     src: "/p4.svg",
     iconLists: ["/py.svg"],
     content: () => {
@@ -113,5 +113,5 @@ export const cards = [
         </p>
       );
     },
-  },
+  }, */
 ];

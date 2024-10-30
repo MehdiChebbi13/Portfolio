@@ -147,11 +147,7 @@ function Projects() {
                   >
                     <img src="/bg.png" alt="bgimg" />
                   </div>
-                  <img
-                    src={item.src}
-                    alt="cover"
-                    className="z-10 absolute bottom-0"
-                  />
+                  <img src={item.src} alt="cover" className="" />{" "}
                 </div>
 
                 <h1 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1">
