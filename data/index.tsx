@@ -95,11 +95,11 @@ export const cards = [
           pour la gestion des operations d&apos;hemodialyse dans les hopitaux
           publics, avec numerisation des dossiers patients et des flux de soins
           critiques. <br />- Developpement d&apos;une solution Full-Stack Spring
-          Boot / React integrant des modules de suivi patients, de
-          planification medicale et de transferts inter-hospitaliers. <br />-
-          Mise en place d&apos;une infrastructure conteneurisee avec Docker et
-          traduction des exigences medicales en specifications techniques
-          garantissant l&apos;integrite et la fiabilite des donnees.
+          Boot / React integrant des modules de suivi patients, de planification
+          medicale et de transferts inter-hospitaliers. <br />- Mise en place
+          d&apos;une infrastructure conteneurisee avec Docker et traduction des
+          exigences medicales en specifications techniques garantissant
+          l&apos;integrite et la fiabilite des donnees.
         </p>
       );
     },

@@ -10,8 +10,8 @@ import {
 const contactProfile = {
   eyebrow: "Informations de contact",
   title: "Contactez-moi",
-  availability: "Disponible pour stage, alternance ou mission freelance",
-  responseTime: "Reponse estimee : sous 24 heures",
+  availability: "Disponible pour alternance ",
+  responseTime: "Dès Septembre 2026",
   location: "Biot, France",
 };
 
@@ -44,7 +44,7 @@ const contactMethods = [
 
 function Contact() {
   return (
-    <section id="contact" className="pb-24 pt-10">
+    <section id="contact" className="scroll-mt-32 pb-24 pt-10">
       <div className="mx-auto max-w-6xl">
         <h2 className="heading">
           Restons en <span className="text-purple">contact</span>
@@ -118,10 +118,10 @@ function Contact() {
                   </p>
                 </div>
               </div>
-              <p className="mt-4 text-sm leading-7 text-white/70">
+              {/* <p className="mt-4 text-sm leading-7 text-white/70">
                 Vous pouvez remplacer ce bloc par votre ville, fuseau horaire,
                 disponibilite ou toute autre information utile.
-              </p>
+              </p> */}
             </div>
           </div>
         </div>

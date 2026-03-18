@@ -1,6 +1,20 @@
-import React from "react";
+"use client";
+
+import React, { useState } from "react";
 import Image from "next/image";
-// Custom Card component defined above
+import { FaCode, FaGitAlt, FaJava, FaPython } from "react-icons/fa";
+import { FaXmark } from "react-icons/fa6";
+import {
+  SiAngular,
+  SiExpress,
+  SiFigma,
+  SiJavascript,
+  SiJunit5,
+  SiPostgresql,
+  SiPostman,
+  SiSpringboot,
+} from "react-icons/si";
+
 interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   className?: string;
@@ -9,7 +23,7 @@ interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 const Card = ({ children, className = "", ...props }: CardProps) => {
   return (
     <div
-      className={`rounded-lg border border-zinc-800 bg-zinc-900/50 p-3 ${className}`}
+      className={`rounded-2xl border border-white/10 bg-white/[0.06] p-3 shadow-[0_10px_24px_rgba(0,0,0,0.12)] backdrop-blur-md ${className}`}
       {...props}
     >
       {children}
@@ -17,34 +31,15 @@ const Card = ({ children, className = "", ...props }: CardProps) => {
   );
 };
 
-// Define the technology interface
 interface Technology {
   name: string;
   description: string;
   icon: React.ReactNode;
 }
 
-// Technology icons as components
-/* const FigmaIcon = () => (
-  <svg viewBox="0 0 24 24" className="w-6 h-6" fill="currentColor">
-    <path
-      d="M8.5 2C6.567 2 5 3.567 5 5.5C5 7.433 6.567 9 8.5 9H15.5C17.433 9 19 7.433 19 5.5C19 3.567 17.433 2 15.5 2H8.5Z"
-      fill="#FF7262"
-    />
-    <path
-      d="M8.5 9C6.567 9 5 10.567 5 12.5C5 14.433 6.567 16 8.5 16H15.5C17.433 16 19 14.433 19 12.5C19 10.567 17.433 9 15.5 9H8.5Z"
-      fill="#1ABCFE"
-    />
-    <path
-      d="M5 19.5C5 17.567 6.567 16 8.5 16C10.433 16 12 17.567 12 19.5C12 21.433 10.433 23 8.5 23C6.567 23 5 21.433 5 19.5Z"
-      fill="#0ACF83"
-    />
-  </svg>
-); */
-
 const TypeScriptIcon = () => (
   <svg
-    className="w-6 h-6 text-blue-500"
+    className="h-6 w-6 text-blue-500"
     viewBox="0 0 24 24"
     fill="currentColor"
   >
@@ -58,26 +53,27 @@ const ReactIcon = () => (
 
 const TailwindIcon = () => (
   <svg
-    className="w-6 h-6 text-cyan-400"
+    className="h-6 w-6 text-cyan-400"
     viewBox="0 0 24 24"
     fill="currentColor"
   >
-    <path d="M12.001,4.8c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 C13.666,10.618,15.027,12,18.001,12c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C16.337,6.182,14.976,4.8,12.001,4.8z M6.001,12c-3.2,0-5.2,1.6-6,4.8c1.2-1.6,2.6-2.2,4.2-1.8c0.913,0.228,1.565,0.89,2.288,1.624 c1.177,1.194,2.538,2.576,5.512,2.576c3.2,0,5.2-1.6,6-4.8c-1.2,1.6-2.6,2.2-4.2,1.8c-0.913-0.228-1.565-0.89-2.288-1.624 C10.337,13.382,8.976,12,6.001,12z" />
+    <path d="M12.001 4.8c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624C13.666 10.618 15.027 12 18.001 12c3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C16.337 6.182 14.976 4.8 12.001 4.8zM6.001 12c-3.2 0-5.2 1.6-6 4.8 1.2-1.6 2.6-2.2 4.2-1.8.913.228 1.565.89 2.288 1.624 1.177 1.194 2.538 2.576 5.512 2.576 3.2 0 5.2-1.6 6-4.8-1.2 1.6-2.6 2.2-4.2 1.8-.913-.228-1.565-.89-2.288-1.624C10.337 13.382 8.976 12 6.001 12z" />
   </svg>
 );
 
 const MySQLIcon = () => (
   <Image src="/mysql.svg" width={26} height={26} alt="MySQL Logo" />
 );
+
 const NextJSIcon = () => (
-  <div className="bg-white w-6 h-6 rounded-full p-[-1px]">
+  <div className="h-6 w-6 rounded-full bg-white p-[-1px]">
     <Image src="/Next-icon.svg" alt="Next Logo" width={26} height={26} />
   </div>
 );
 
 const MongoDBIcon = () => (
   <svg
-    className="w-6 h-6 text-green-500"
+    className="h-6 w-6 text-green-500"
     viewBox="0 0 24 24"
     fill="currentColor"
   >
@@ -87,86 +83,262 @@ const MongoDBIcon = () => (
 
 const NodeIcon = () => (
   <svg
-    className="w-6 h-6 text-green-600"
+    className="h-6 w-6 text-green-600"
     viewBox="0 0 24 24"
     fill="currentColor"
   >
-    <path d="M11.998,24c-0.321,0-0.641-0.084-0.922-0.247l-2.936-1.737c-0.438-0.245-0.224-0.332-0.08-0.383 c0.585-0.203,0.703-0.25,1.328-0.604c0.065-0.037,0.151-0.023,0.218,0.017l2.256,1.339c0.082,0.045,0.197,0.045,0.272,0l8.795-5.076 c0.082-0.047,0.134-0.141,0.134-0.238V6.921c0-0.099-0.053-0.192-0.137-0.242l-8.791-5.072c-0.081-0.047-0.189-0.047-0.271,0 L3.075,6.68C2.99,6.729,2.936,6.825,2.936,6.921v10.15c0,0.097,0.054,0.189,0.139,0.235l2.409,1.392 c1.307,0.654,2.108-0.116,2.108-0.89V7.787c0-0.142,0.114-0.253,0.256-0.253h1.115c0.139,0,0.255,0.112,0.255,0.253v10.021 c0,1.745-0.95,2.745-2.604,2.745c-0.508,0-0.909,0-2.026-0.551L2.28,18.675c-0.57-0.329-0.922-0.945-0.922-1.604V6.921 c0-0.659,0.353-1.275,0.922-1.603l8.795-5.082c0.557-0.315,1.296-0.315,1.848,0l8.794,5.082c0.57,0.329,0.924,0.944,0.924,1.603 v10.15c0,0.659-0.354,1.273-0.924,1.604l-8.794,5.078C12.643,23.916,12.324,24,11.998,24z M19.099,13.993 c0-1.9-1.284-2.406-3.987-2.763c-2.731-0.361-3.009-0.548-3.009-1.187c0-0.528,0.235-1.233,2.258-1.233 c1.807,0,2.473,0.389,2.747,1.607c0.024,0.115,0.129,0.199,0.247,0.199h1.141c0.071,0,0.138-0.031,0.186-0.081 c0.048-0.054,0.074-0.123,0.067-0.196c-0.177-2.098-1.571-3.076-4.388-3.076c-2.508,0-4.004,1.058-4.004,2.833 c0,1.925,1.488,2.457,3.895,2.695c2.88,0.282,3.103,0.703,3.103,1.269c0,0.983-0.789,1.402-2.642,1.402 c-2.327,0-2.839-0.584-3.011-1.742c-0.02-0.124-0.126-0.215-0.253-0.215h-1.137c-0.141,0-0.254,0.112-0.254,0.253 c0,1.482,0.806,3.248,4.655,3.248C17.501,17.007,19.099,15.91,19.099,13.993z" />
+    <path d="M11.998 24c-.321 0-.641-.084-.922-.247L8.14 22.016c-.438-.245-.224-.332-.08-.383.585-.203.703-.25 1.328-.604.065-.037.151-.023.218.017l2.256 1.339c.082.045.197.045.272 0l8.795-5.076c.082-.047.134-.141.134-.238V6.921c0-.099-.053-.192-.137-.242l-8.791-5.072c-.081-.047-.189-.047-.271 0L3.075 6.68c-.085.049-.139.145-.139.241v10.15c0 .097.054.189.139.235l2.409 1.392c1.307.654 2.108-.116 2.108-.89V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.112.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.508 0-.909 0-2.026-.551L2.28 18.675c-.57-.329-.922-.945-.922-1.604V6.921c0-.659.353-1.275.922-1.603L11.075.236c.557-.315 1.296-.315 1.848 0l8.794 5.082c.57.329.924.944.924 1.603v10.15c0 .659-.354 1.273-.924 1.604l-8.794 5.078c-.28.163-.599.247-.925.247zM19.099 13.993c0-1.9-1.284-2.406-3.987-2.763-2.731-.361-3.009-.548-3.009-1.187 0-.528.235-1.233 2.258-1.233 1.807 0 2.473.389 2.747 1.607.024.115.129.199.247.199h1.141c.071 0 .138-.031.186-.081.048-.054.074-.123.067-.196-.177-2.098-1.571-3.076-4.388-3.076-2.508 0-4.004 1.058-4.004 2.833 0 1.925 1.488 2.457 3.895 2.695 2.88.282 3.103.703 3.103 1.269 0 .983-.789 1.402-2.642 1.402-2.327 0-2.839-.584-3.011-1.742-.02-.124-.126-.215-.253-.215h-1.137c-.141 0-.254.112-.254.253 0 1.482.806 3.248 4.655 3.248 2.974 0 4.572-1.097 4.572-3.014z" />
   </svg>
 );
-const Docker = () => (
+
+const DockerIcon = () => (
   <Image src="/dock.svg" alt="Docker Logo" width={26} height={26} />
 );
-// Define the technologies data
+
+const JavaIcon = () => <FaJava className="h-6 w-6 text-orange-400" />;
+
+const PythonIcon = () => <FaPython className="h-6 w-6 text-yellow-300" />;
+
+const CppIcon = () => <FaCode className="h-6 w-6 text-sky-400" />;
+
+const JavaScriptIcon = () => (
+  <SiJavascript className="h-6 w-6 text-yellow-300" />
+);
+
+const SQLIcon = () => (
+  <svg
+    className="h-6 w-6 text-cyan-300"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+  >
+    <path d="M12 2C7.03 2 3 4.24 3 7v10c0 2.76 4.03 5 9 5s9-2.24 9-5V7c0-2.76-4.03-5-9-5zm0 2c4.42 0 7 1.79 7 3s-2.58 3-7 3-7-1.79-7-3 2.58-3 7-3zm0 16c-4.42 0-7-1.79-7-3v-2.2C6.53 16.16 9.1 17 12 17s5.47-.84 7-2.2V17c0 1.21-2.58 3-7 3zm0-5c-4.42 0-7-1.79-7-3V9.8C6.53 11.16 9.1 12 12 12s5.47-.84 7-2.2V12c0 1.21-2.58 3-7 3z" />
+  </svg>
+);
+
+const AngularIcon = () => <SiAngular className="h-6 w-6 text-red-500" />;
+
+const SpringBootIcon = () => (
+  <SiSpringboot className="h-6 w-6 text-green-500" />
+);
+
+const ExpressIcon = () => <SiExpress className="h-6 w-6 text-gray-200" />;
+
+const PostgreSQLIcon = () => <SiPostgresql className="h-6 w-6 text-blue-400" />;
+
+const GitIcon = () => <FaGitAlt className="h-6 w-6 text-orange-500" />;
+
+const PostmanIcon = () => <SiPostman className="h-6 w-6 text-orange-400" />;
+
+const JUnitIcon = () => <SiJunit5 className="h-6 w-6 text-lime-400" />;
+
+const FigmaIcon = () => <SiFigma className="h-6 w-6 text-pink-400" />;
+
 const technologies: Technology[] = [
   {
-    name: "Docker",
-    description: "Plateforme logicielle",
-    icon: <Docker />,
+    name: "Java",
+    description: "POO et backend enterprise",
+    icon: <JavaIcon />,
   },
-
+  {
+    name: "Python",
+    description: "Scripts, algo et automatisation",
+    icon: <PythonIcon />,
+  },
+  {
+    name: "C/C++",
+    description: "Bases systeme et performance",
+    icon: <CppIcon />,
+  },
+  {
+    name: "JavaScript",
+    description: "Logique web et interfaces",
+    icon: <JavaScriptIcon />,
+  },
   {
     name: "TypeScript",
-    description: "JavaScript en mieux",
+    description: "JavaScript type-safe",
     icon: <TypeScriptIcon />,
   },
   {
+    name: "SQL",
+    description: "Requetes et modelisation",
+    icon: <SQLIcon />,
+  },
+  {
     name: "React",
-    description: "JavaScript Library",
+    description: "UI modernes et composants",
     icon: <ReactIcon />,
   },
   {
+    name: "Angular",
+    description: "Frontend SPA structure",
+    icon: <AngularIcon />,
+  },
+  {
     name: "Tailwind",
-    description: "CSS Framework",
+    description: "HTML5/CSS3 utilitaire",
     icon: <TailwindIcon />,
   },
   {
-    name: "MySQL",
-    description: "Base de données",
-    icon: <MySQLIcon />,
-  },
-  {
     name: "Next.js",
-    description: "Framework React",
+    description: "Framework React full-stack",
     icon: <NextJSIcon />,
   },
   {
-    name: "MongoDB",
-    description: "Base de données NoSQL",
-    icon: <MongoDBIcon />,
+    name: "Figma",
+    description: "Maquettage UI et prototypage",
+    icon: <FigmaIcon />,
+  },
+  {
+    name: "Spring Boot",
+    description: "API REST en Java",
+    icon: <SpringBootIcon />,
   },
   {
     name: "Node.js",
-    description: "Environnement d'exécution ",
+    description: "Runtime backend JavaScript",
     icon: <NodeIcon />,
+  },
+  {
+    name: "Express.js",
+    description: "Backend API Node.js",
+    icon: <ExpressIcon />,
+  },
+  {
+    name: "MySQL",
+    description: "Base de donnees relationnelle",
+    icon: <MySQLIcon />,
+  },
+  {
+    name: "PostgreSQL",
+    description: "Base relationnelle robuste",
+    icon: <PostgreSQLIcon />,
+  },
+  {
+    name: "MongoDB",
+    description: "Base de donnees NoSQL",
+    icon: <MongoDBIcon />,
+  },
+  {
+    name: "Docker",
+    description: "Conteneurisation et portabilite",
+    icon: <DockerIcon />,
+  },
+  {
+    name: "Git/GitHub",
+    description: "Versioning et collaboration",
+    icon: <GitIcon />,
+  },
+  {
+    name: "Postman",
+    description: "Test et debug d'API",
+    icon: <PostmanIcon />,
+  },
+  {
+    name: "JUnit",
+    description: "Tests unitaires Java",
+    icon: <JUnitIcon />,
   },
 ];
 
 const TechStack = () => {
+  const [isMobileListOpen, setIsMobileListOpen] = useState(false);
+  const carouselItems = [...technologies, ...technologies];
+
   return (
-    <div className="min-h-screen  text-white p-8">
-      <div className="max-w-6xl mx-auto">
+    <section className="py-24 text-white">
+      <div className="mx-auto max-w-6xl">
         <p className="heading mb-8">Technologies que j&apos;utilise</p>
+        <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-white/65 md:text-base">
+          Un apercu de mon stack principal
+        </p>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {technologies.map((tech, index) => (
+        <div className="md:hidden">
+          <button
+            type="button"
+            onClick={() => setIsMobileListOpen(true)}
+            className="mx-auto flex items-center justify-center rounded-full border border-white/15 bg-white/[0.08] px-6 py-3 text-sm font-medium text-white transition hover:bg-white/[0.12]"
+          >
+            Voir la liste
+          </button>
+        </div>
+      </div>
+
+      {isMobileListOpen && (
+        <div className="fixed inset-0 z-[120] flex items-end bg-black/70 backdrop-blur-sm md:hidden">
+          <div className="flex h-[78vh] w-full flex-col rounded-t-[2rem] border-t border-white/10 bg-slate-950 px-5 pb-5 pt-4">
+            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-white/15" />
+            <div className="mb-4 flex items-center justify-between">
+              <div>
+                <p className="text-lg font-semibold text-white">Tech Stack</p>
+                <p className="text-sm text-white/55">
+                  Liste complete des technologies
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setIsMobileListOpen(false)}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 bg-white/[0.06] text-white"
+              >
+                <FaXmark className="h-5 w-5" />
+              </button>
+            </div>
+
+            <div className="flex-1 space-y-3 overflow-y-auto pr-1 [scrollbar-color:rgba(255,255,255,0.25)_transparent] [scrollbar-width:thin]">
+              {technologies.map((tech) => (
+                <Card
+                  key={`mobile-${tech.name}`}
+                  className="border-white/10 bg-white/[0.08] px-4 py-4"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="flex h-8 w-8 items-center justify-center text-white/90">
+                      {tech.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-[15px] font-medium text-white">
+                        {tech.name}
+                      </h3>
+                      <p className="mt-1 text-sm text-white/60">
+                        {tech.description}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      <div className="relative left-1/2 right-1/2 hidden w-screen -translate-x-1/2 overflow-hidden md:block">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-black-100 via-black-100/80 to-transparent md:w-24" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-black-100 via-black-100/80 to-transparent md:w-24" />
+
+        <div className="flex w-max min-w-full shrink-0 gap-5 animate-scroll px-5 [--animation-duration:45s] sm:px-8">
+          {carouselItems.map((tech, index) => (
             <Card
-              key={tech.name}
-              className={`hover:bg-zinc-800/50 transition-colors item${index}`}
+              key={`${tech.name}-${index}`}
+              className="w-[240px] shrink-0 border-white/12 bg-white/[0.08] px-5 py-4 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:bg-white/[0.12]"
+              aria-hidden={index >= technologies.length}
             >
-              <div className="flex items-start space-x-4">
-                <div className="p-2 bg-zinc-800/50 rounded-lg">{tech.icon}</div>
+              <div className="flex items-center gap-4">
+                <div className="flex h-8 w-8 items-center justify-center text-white/90">
+                  {tech.icon}
+                </div>
                 <div>
-                  <h3 className="font-medium text-white">{tech.name}</h3>
-
-                  <p className="text-sm text-gray-400">{tech.description}</p>
+                  <h3 className="text-[15px] font-medium tracking-[0.01em] text-white">
+                    {tech.name}
+                  </h3>
+                  <p className="mt-1 text-sm text-white/60">
+                    {tech.description}
+                  </p>
                 </div>
               </div>
             </Card>
           ))}
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
