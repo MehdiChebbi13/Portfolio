@@ -41,7 +41,7 @@ export const cards = [
     title: "GetBluffed - Jeu de cartes multijoueur temps reel",
     description: "Projet Personnel | 2026 - Present",
     src: "/bg.png",
-    iconLists: ["/ts.svg"],
+    iconLists: ["/ts.svg", "/re.svg", "/node.svg", "/dock.svg", "/sql.svg"],
     content: () => {
       return (
         <p>
@@ -65,7 +65,7 @@ export const cards = [
     title: "Kyonokibo - Plateforme d'accompagnement pour patients Alzheimer",
     description: "Projet Full-Stack | 2026 - Present",
     src: "/bg.png",
-    iconLists: [],
+    iconLists: ["/ang.svg", "/spr.svg", "/ts.svg", "/sql.png", "/dock.svg"],
     content: () => {
       return (
         <p>
@@ -87,7 +87,7 @@ export const cards = [
     title: "hemodia - Plateforme de gestion des operations d'hemodialyse",
     description: "Projet Full-Stack",
     src: "/bg.png",
-    iconLists: ["/re.svg", "/dock.svg"],
+    iconLists: ["/re.svg", "/spr.svg", "/ts.svg", "/sql.png", "/dock.svg"],
     content: () => {
       return (
         <p>
