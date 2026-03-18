@@ -115,7 +115,9 @@ const SQLIcon = () => (
   </svg>
 );
 
-const AngularIcon = () => <SiAngular className="h-6 w-6 text-red-500" />;
+const AngularIcon = () => (
+  <Image src="/ang.svg" width={26} height={26} alt="Angular Logo" />
+);
 
 const SpringBootIcon = () => (
   <SiSpringboot className="h-6 w-6 text-green-500" />

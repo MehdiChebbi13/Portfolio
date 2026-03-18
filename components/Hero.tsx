@@ -30,9 +30,16 @@ function Hero() {
 
       <div className="flex justify-center relative my-20 z-10">
         <div className="max-w-[89vw] md:max-w-2xl lg:max-w-[60vw] flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
+          <div className="mb-6 inline-flex items-center gap-3 rounded-full border border-slate-200 bg-white/80 px-4 py-3 text-sm font-semibold text-slate-700 shadow-[0_10px_30px_rgba(15,23,42,0.08)] dark:border-white/10 dark:bg-white/5 dark:text-white/90">
+            <span className="relative flex h-3 w-3">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-3 w-3 rounded-full bg-emerald-400" />
+            </span>
+            <span>Disponible pour alternance — Sept. 2026</span>
+          </div>
+          {/* <p className="uppercase tracking-widest text-xs text-center text-blue-100 max-w-80">
             Le portfolio officiel de Mehdi Chebbi
-          </p>
+          </p> */}
           <TextGenerateEffect
             words="Conception d'experience web modernes et performantes"
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
