@@ -38,7 +38,7 @@ function Hero() {
             className="text-center text-[40px] md:text-5xl lg:text-6xl"
           />
           <p className="text-center md:tracking-wider my-4 text-sm md:text-lg lg:text-2xl">
-            Bonjour, Je suis Mehdi, eleve ingenieur à Polytech Nice Sophia,
+            Bonjour, Je suis Mehdi, élève ingénieur à Polytech Nice Sophia,
             situé à
             <br /> Biot
           </p>

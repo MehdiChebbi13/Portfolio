@@ -1,17 +1,15 @@
 "use client";
 import { cards } from "@/data";
-import Image from "next/image";
-import React, { useEffect, useId, useRef, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useEffect, useRef, useState } from "react";
 import { useOutsideClick } from "@/hooks/use-outside-click";
-import { PinContainer } from "./ui/PinContainer";
 
 function Projects() {
   const [active, setActive] = useState<(typeof cards)[number] | boolean | null>(
-    null
+    null,
   );
   const ref = useRef<HTMLDivElement>(null);
-  const id = useId();
+  const activeCard = active && typeof active === "object" ? active : null;
+  const isModalOpen = Boolean(activeCard);
 
   useEffect(() => {
     function onKeyDown(event: KeyboardEvent) {
@@ -20,112 +18,81 @@ function Projects() {
       }
     }
 
-    if (active && typeof active === "object") {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
+    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
+    window.dispatchEvent(
+      new CustomEvent("project-modal-toggle", {
+        detail: { open: isModalOpen },
+      }),
+    );
 
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
-  }, [active]);
+    return () => {
+      document.body.style.overflow = "auto";
+      window.removeEventListener("keydown", onKeyDown);
+      window.dispatchEvent(
+        new CustomEvent("project-modal-toggle", {
+          detail: { open: false },
+        }),
+      );
+    };
+  }, [isModalOpen]);
 
   useOutsideClick(ref, () => setActive(null));
 
   return (
     <>
-      {/* This AnimatePresence component is responsible for animating the backdrop when a card is expanded */}
-      <AnimatePresence>
-        {active && typeof active === "object" && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/20 h-full w-full z-10"
-          />
-        )}
-      </AnimatePresence>
+      {activeCard && (
+        <div className="fixed inset-0 z-10 h-full w-full bg-black/70 backdrop-blur-sm" />
+      )}
 
-      {/* This AnimatePresence component is responsible for animating the expanded card */}
-      <AnimatePresence>
-        {active && typeof active === "object" ? (
-          <div className="fixed inset-0  grid place-items-center z-[100]">
-            {/* This button is responsible for closing the active card */}
-            <motion.button
-              key={`button-${active.title}-${id}`}
-              layout
-              initial={{
-                opacity: 0,
-              }}
-              animate={{
-                opacity: 1,
-              }}
-              exit={{
-                opacity: 0,
-                transition: {
-                  duration: 0.05,
-                },
-              }}
-              className="flex absolute top-2 right-2 lg:hidden items-center justify-center bg-white rounded-full h-6 w-6"
-              onClick={() => setActive(null)}
-            >
-              <CloseIcon />
-            </motion.button>
+      {activeCard ? (
+        <div className="fixed inset-0 z-[100] grid place-items-center p-4">
+          <button
+            type="button"
+            className="absolute right-6 top-6 flex h-10 w-10 items-center justify-center rounded-full border border-white/15 bg-white/10 text-white shadow-lg lg:hidden"
+            onClick={() => setActive(null)}
+          >
+            <CloseIcon />
+          </button>
 
-            {/* This div contains the expanded card */}
-            <motion.div
-              layoutId={`card-${active.title}-${id}`}
-              ref={ref}
-              className="w-full max-w-[500px]  h-full md:h-fit md:max-h-[90%]  flex flex-col bg-white dark:bg-neutral-900 sm:rounded-3xl overflow-hidden"
-            >
-              <motion.div layoutId={`image-${active.title}-${id}`}>
-                <Image
-                  priority
-                  width={200}
-                  height={200}
-                  src="/bg.png"
-                  alt={active.title}
-                  className="w-full h-80 lg:h-80 sm:rounded-tr-lg sm:rounded-tl-lg object-cover object-top"
-                />
-              </motion.div>
+          <div
+            ref={ref}
+            className="flex h-full w-full max-w-[560px] max-h-[88vh] flex-col overflow-hidden rounded-3xl border border-white/10 bg-slate-950/95 shadow-[0_30px_80px_rgba(0,0,0,0.45)]"
+          >
+            {/*  <div>
+              <Image
+                priority
+                width={200}
+                height={200}
+                src="/bg.png"
+                alt={active.title}
+                className="h-56 w-full object-cover object-top sm:h-64"
+              />
+            </div> */}
 
-              <div>
-                <div className="flex justify-between items-start p-4">
-                  <div className="">
-                    <motion.h3
-                      layoutId={`title-${active.title}-${id}`}
-                      className="font-bold text-neutral-700 dark:text-neutral-200"
-                    >
-                      {active.title}
-                    </motion.h3>
-                    <motion.p
-                      layoutId={`description-${active.description}-${id}`}
-                      className="text-neutral-600 dark:text-neutral-400"
-                    >
-                      {active.description}
-                    </motion.p>
-                  </div>
-                </div>
-                <div className="pt-4 relative px-4">
-                  <motion.div
-                    layout
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    className="text-neutral-600 text-s md:text-sm lg:text-base h-44 md:h-fit pb-10 flex flex-col items-start gap-4 overflow-auto dark:text-neutral-400 [mask:linear-gradient(to_bottom,white,white,transparent)] [scrollbar-width:none] [-ms-overflow-style:none] [-webkit-overflow-scrolling:touch]"
-                  >
-                    {typeof active.content === "function"
-                      ? active.content()
-                      : active.content}
-                  </motion.div>
+            <div className="flex min-h-0 flex-1 flex-col">
+              <div className="flex items-start justify-between border-b border-white/10 px-6 py-5">
+                <div className="">
+                  <h3 className="text-xl font-bold text-white md:text-2xl">
+                    {activeCard.title}
+                  </h3>
+                  <p className="mt-1 text-sm font-medium text-white/75 md:text-base">
+                    {activeCard.description}
+                  </p>
                 </div>
               </div>
-            </motion.div>
+              <div className="min-h-0 flex-1 px-6 py-5">
+                <div className="h-full overflow-y-auto rounded-2xl  bg-white/5 px-4 py-4 text-xl leading-7 text-white/90 md:text-base [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-thumb]:bg-white/30 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar]:w-2 [scrollbar-color:rgba(255,255,255,0.3)_transparent] [scrollbar-width:thin]">
+                  {typeof activeCard.content === "function"
+                    ? activeCard.content()
+                    : activeCard.content}
+                </div>
+              </div>
+            </div>
           </div>
-        ) : null}
-      </AnimatePresence>
+        </div>
+      ) : null}
 
-      {/* This is the main container for the project cards */}
       <div className="py-20 max-w-6xl mx-auto " id="project">
         <h1 className="heading">
           Une petite selection de{" "}
@@ -133,13 +100,12 @@ function Projects() {
         </h1>
         <div className="flex flex-wrap items-center justify-center p-4 gap-16 mt-10">
           {cards.map((item) => (
-            <motion.div
-              layoutId={`card-${item.title}-${id}`}
-              key={`card-${item.title}-${id}`}
+            <div
+              key={item.title}
               onClick={() => setActive(item)}
-              className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw]"
+              className="lg:min-h-[32.5rem] h-[25rem] flex items-center justify-center sm:w-96 w-[80vw] cursor-pointer"
             >
-              <PinContainer>
+              <div className="relative z-50 rounded-2xl border border-white/[0.1] bg-grid-small-black-100 p-4 shadow-[0_8px_16px_rgb(0_0_0/0.4)] overflow-hidden">
                 <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
                   <div
                     className="relative w-full h-full overflow-hidden lg:rounded-3xl"
@@ -170,16 +136,13 @@ function Projects() {
                   </div>
 
                   <div className="flex justify-center items-center">
-                    <motion.button
-                      layoutId={`button-${item.title}-${id}`}
-                      className="flex lg:text-xl md:text-xs text-sm text-purple"
-                    >
+                    <span className="flex lg:text-xl md:text-xs text-sm text-purple">
                       En Savoir Plus
-                    </motion.button>
+                    </span>
                   </div>
                 </div>
-              </PinContainer>
-            </motion.div>
+              </div>
+            </div>
           ))}
         </div>
       </div>
@@ -188,22 +151,9 @@ function Projects() {
 }
 
 export default Projects;
-// The CloseIcon component is a simple SVG icon used to close the expanded card
 export const CloseIcon = () => {
   return (
-    <motion.svg
-      initial={{
-        opacity: 0,
-      }}
-      animate={{
-        opacity: 1,
-      }}
-      exit={{
-        opacity: 0,
-        transition: {
-          duration: 0.05,
-        },
-      }}
+    <svg
       xmlns="http://www.w3.org/2000/svg"
       width="30"
       height="30"
@@ -213,11 +163,11 @@ export const CloseIcon = () => {
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"
-      className="h-4 w-4 text-black"
+      className="h-4 w-4 text-white"
     >
       <path stroke="none" d="M0 0h24v24H0z" fill="none" />
       <path d="M18 6l-12 12" />
       <path d="M6 6l12 12" />
-    </motion.svg>
+    </svg>
   );
 };

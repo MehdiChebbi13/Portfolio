@@ -38,51 +38,68 @@ export const cards = [
   },
   {
     id: 2,
-    title: "Remotini Application de Télétravail",
-    description: "Projet Universitaire",
-    src: "https://utfs.io/f/TWbmQ35jWAGYM0PsDZF9R1a3ScVBnDK4vlxqXh2ebOfmCAPs",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg"],
+    title: "GetBluffed - Jeu de cartes multijoueur temps reel",
+    description: "Projet Personnel | 2026 - Present",
+    src: "/bg.png",
+    iconLists: ["/ts.svg"],
     content: () => {
       return (
         <p>
-          • Conception et d&eacute;veloppement d&apos;une application de
-          t&eacute;l&eacute;travail nomm&eacute;e Remotini, permettant une
-          collaboration vid&eacute;o simplifi&eacute;e et fluide pour les
-          &eacute;quipes distantes. <br />
-          • Utilisation de TypeScript et React pour cr&eacute;er une interface
-          utilisateur intuitive et r&eacute;active, offrant une
-          exp&eacute;rience utilisateur am&eacute;lior&eacute;e. <br />
-          • Mise en œuvre de Tailwind CSS pour la cr&eacute;ation d&apos;une
-          interface moderne et adaptable aux diff&eacute;rents appareils. <br />
-          • Tableau de bord avec statistiques en temps r&eacute;el, permettant
-          aux utilisateurs de suivre les performances de leur &eacute;quipe et
-          de g&eacute;rer efficacement les r&eacute;unions. <br />
+          • Développement d&apos;un jeu de cartes multijoueur en temps réel
+          supportant de 3 à 6 joueurs, avec synchronisation instantanée de
+          l&apos;état du jeu. <br />
+          • Mise en place d&apos;une architecture server-authoritative avec
+          Node.js, Express et WebSockets pour garantir la cohérence du jeu et
+          prévenir les manipulations côté client. <br />
+          • Conception du backend en TypeScript et modélisation du moteur de jeu
+          à l&apos;aide d&apos;une machine d&apos;état pour gérer les tours, les
+          actions et les résolutions de bluff. <br />• Structuration du projet
+          pour assurer une logique de jeu fiable, une bonne maintenabilité du
+          code et une expérience multijoueur fluide.
         </p>
       );
     },
   },
   {
     id: 3,
-    title: "Responsive GYM Website",
-    description: "Projet Personnel",
-    src: "https://utfs.io/f/TWbmQ35jWAGYnRZykrNMmNk15Whazl3iFf4T9RAY2gpLt0cH",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/fm.svg"],
+    title: "Kyonokibo - Plateforme d'accompagnement pour patients Alzheimer",
+    description: "Projet Full-Stack | 2026 - Present",
+    src: "/bg.png",
+    iconLists: [],
     content: () => {
       return (
         <p>
-          • Cr&eacute;ation d&apos;un site web de salle de sport r&eacute;actif,
-          con&ccedil;u pour offrir une exp&eacute;rience utilisateur immersive
-          et accessible sur tous les appareils. <br />
-          • Utilisation de Figma pour concevoir des maquettes attrayantes et
-          harmonieuses, mettant en valeur les services de la salle de sport et
-          permettant une navigation intuitive. <br />
-          • D&eacute;veloppement front-end avec React et TypeScript, assurant
-          une interface fluide et performante. <br />
-          • Application de Tailwind CSS pour une mise en page moderne,
-          facilitant l&apos;adaptabilit&eacute; et la r&eacute;activit&eacute;
-          sur les mobiles, tablettes et ordinateurs de bureau. <br />•
-          Am&eacute;lioration de l&apos;engagement des utilisateurs gr&acirc;ce
-          &agrave; une optimisation UX/UI cibl&eacute;e.
+          - Developpement d&apos;une application web Full-Stack Angular / Spring
+          Boot dediee au suivi des patients Alzheimer et a la coordination entre
+          patients, aidants et professionnels de sante. <br />- Implementation
+          d&apos;un frontend Angular accessible permettant la consultation du
+          planning quotidien et la realisation de quiz de stimulation cognitive,
+          notamment autour de la reconnaissance faciale. <br />- Conception
+          d&apos;un backend Spring Boot exposant des API REST pour la gestion
+          des rendez-vous, des prises de medicaments et le suivi des progres des
+          patients.
+        </p>
+      );
+    },
+  },
+  {
+    id: 4,
+    title: "hemodia - Plateforme de gestion des operations d'hemodialyse",
+    description: "Projet Full-Stack",
+    src: "/bg.png",
+    iconLists: ["/re.svg", "/dock.svg"],
+    content: () => {
+      return (
+        <p>
+          - Conception et developpement d&apos;une plateforme web centralisee
+          pour la gestion des operations d&apos;hemodialyse dans les hopitaux
+          publics, avec numerisation des dossiers patients et des flux de soins
+          critiques. <br />- Developpement d&apos;une solution Full-Stack Spring
+          Boot / React integrant des modules de suivi patients, de
+          planification medicale et de transferts inter-hospitaliers. <br />-
+          Mise en place d&apos;une infrastructure conteneurisee avec Docker et
+          traduction des exigences medicales en specifications techniques
+          garantissant l&apos;integrite et la fiabilite des donnees.
         </p>
       );
     },
