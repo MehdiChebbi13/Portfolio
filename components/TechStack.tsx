@@ -247,7 +247,7 @@ const TechStack = () => {
   const carouselItems = [...technologies, ...technologies];
 
   return (
-    <section className="py-24 text-white">
+    <section id="skills" className="scroll-mt-32 py-24 text-white">
       <div className="mx-auto max-w-6xl">
         <p className="heading mb-8">Technologies que j&apos;utilise</p>
         <p className="mx-auto mb-10 max-w-2xl text-center text-sm text-white/65 md:text-base">

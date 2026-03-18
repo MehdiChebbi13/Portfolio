@@ -49,10 +49,10 @@ function Contact() {
         <h2 className="heading">
           Restons en <span className="text-purple">contact</span>
         </h2>
-        <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-white/70 md:text-base">
+        {/* <p className="mx-auto mt-4 max-w-2xl text-center text-sm text-white/70 md:text-base">
           Une section de contact simple avec des donnees fictives pour vous
           laisser une base propre a personnaliser.
-        </p>
+        </p> */}
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
           <div className="rounded-3xl border border-white/10 bg-[linear-gradient(135deg,rgba(16,23,42,0.94),rgba(24,24,27,0.9))] p-8 shadow-[0_18px_50px_rgba(0,0,0,0.35)]">
