@@ -57,7 +57,7 @@ export const projects: Project[] = [
     ],
     technologies: ["Node.js", "Express", "WebSockets", "TypeScript", "React"],
     githubUrl: githubProfilePlaceholder,
-    src: "/bg.png",
+    src: "https://sgw66jnpmt.ufs.sh/f/TWbmQ35jWAGY20nvi7XtcfnvFj3b4YgsM2QX1zilxSrTBpo0",
     iconLists: ["/ts.svg", "/re.svg", "/sql.png", "/tail.svg"],
   },
   {
@@ -74,7 +74,7 @@ export const projects: Project[] = [
     ],
     technologies: ["Angular", "Spring Boot", "TypeScript", "SQL"],
     githubUrl: githubProfilePlaceholder,
-    src: "/bg.png",
+    src: "https://sgw66jnpmt.ufs.sh/f/TWbmQ35jWAGY4Of4iZEBjMVz3vadTeSDCYgQALHtmcxGZqkO",
     iconLists: ["/ang.svg", "/spr.svg", "/ts.svg", "/sql.png"],
   },
   {
@@ -91,7 +91,7 @@ export const projects: Project[] = [
     ],
     technologies: ["React", "Spring Boot", "TypeScript", "SQL", "Docker"],
     githubUrl: githubProfilePlaceholder,
-    src: "/bg.png",
+    src: "https://sgw66jnpmt.ufs.sh/f/TWbmQ35jWAGYZ8WN0ZdPO875xsAuiv4Jb3eEtn1GowpVaMBm",
     iconLists: [
       "/re.svg",
       "/spr.svg",

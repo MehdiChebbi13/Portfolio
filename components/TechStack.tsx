@@ -5,7 +5,6 @@ import Image from "next/image";
 import { FaCode, FaGitAlt, FaJava, FaPython } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
 import {
-  SiAngular,
   SiExpress,
   SiFigma,
   SiJavascript,
