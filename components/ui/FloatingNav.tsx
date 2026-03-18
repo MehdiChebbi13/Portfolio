@@ -1,11 +1,7 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import {
-  motion,
-  AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
-} from "framer-motion";
+
+import React, { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
@@ -20,16 +16,15 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
-  const { scrollYProgress } = useScroll();
-
-  // set true for the initial state so that nav bar is visible in the hero section
-  const [visible, setVisible] = useState(true);
+  const hashLinks = useMemo(
+    () => navItems.filter((item) => item.link.startsWith("#")),
+    [navItems],
+  );
+  const [activeLink, setActiveLink] = useState(hashLinks[0]?.link ?? "");
   const [projectModalOpen, setProjectModalOpen] = useState(false);
 
   useEffect(() => {
-    const handleProjectModalToggle = (
-      event: Event,
-    ) => {
+    const handleProjectModalToggle = (event: Event) => {
       const modalEvent = event as CustomEvent<{ open?: boolean }>;
       setProjectModalOpen(Boolean(modalEvent.detail?.open));
     };
@@ -37,27 +32,75 @@ export const FloatingNav = ({
     window.addEventListener("project-modal-toggle", handleProjectModalToggle);
 
     return () => {
-      window.removeEventListener("project-modal-toggle", handleProjectModalToggle);
+      window.removeEventListener(
+        "project-modal-toggle",
+        handleProjectModalToggle,
+      );
     };
   }, []);
 
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
-    if (typeof current === "number") {
-      const direction = current! - scrollYProgress.getPrevious()!;
-
-      if (scrollYProgress.get() < 0.05) {
-        // also set true for the initial state
-        setVisible(true);
-      } else {
-        if (direction < 0) {
-          setVisible(true);
-        } else {
-          setVisible(false);
-        }
-      }
+  useEffect(() => {
+    if (hashLinks.length === 0) {
+      return;
     }
-  });
+
+    const sections = hashLinks
+      .map((item) => {
+        const section = document.querySelector(item.link);
+        return section instanceof HTMLElement
+          ? { link: item.link, element: section }
+          : null;
+      })
+      .filter(
+        (entry): entry is { link: string; element: HTMLElement } =>
+          entry !== null,
+      );
+
+    if (sections.length === 0) {
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+
+        if (visibleEntries.length === 0) {
+          return;
+        }
+
+        const activeSection = sections.find(
+          ({ element }) => element === visibleEntries[0].target,
+        );
+
+        if (activeSection) {
+          setActiveLink(activeSection.link);
+        }
+      },
+      {
+        rootMargin: "-35% 0px -45% 0px",
+        threshold: [0.2, 0.4, 0.6],
+      },
+    );
+
+    sections.forEach(({ element }) => observer.observe(element));
+
+    const handleHashChange = () => {
+      const currentHash = window.location.hash;
+
+      if (hashLinks.some((item) => item.link === currentHash)) {
+        setActiveLink(currentHash);
+      }
+    };
+
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [hashLinks]);
 
   const handleNavClick = (
     event: React.MouseEvent<HTMLAnchorElement>,
@@ -69,74 +112,64 @@ export const FloatingNav = ({
 
     const target = document.querySelector(href);
 
-    if (!target) {
+    if (!(target instanceof HTMLElement)) {
       return;
     }
 
     event.preventDefault();
+    setActiveLink(href);
     target.scrollIntoView({ behavior: "smooth", block: "start" });
     window.history.replaceState(null, "", href);
   };
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible && !projectModalOpen ? 0 : -100,
-          opacity: visible && !projectModalOpen ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        className={cn(
-          // change rounded-full to rounded-lg
-          // remove dark:border-white/[0.2] dark:bg-black bg-white border-transparent
-          // change  pr-2 pl-8 py-2 to px-10 py-5
-          "flex max-w-fit md:min-w-[70vw] lg:min-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-10 py-5 rounded-lg border border-black/.1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4",
-          projectModalOpen && "pointer-events-none",
-          className
-        )}
-        style={{
-          backdropFilter: "blur(16px) saturate(180%)",
-          backgroundColor: "rgba(17, 25, 40, 0.75)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.125)",
-        }}
-      >
-        {navItems.map(
-          (
-            navItem: {
-              name: string;
-              link: string;
-              icon?: JSX.Element;
-            },
-            idx: number
-          ) => (
-            <Link
-              key={`link=${idx}`}
-              href={navItem.link}
-              onClick={(event) => handleNavClick(event, navItem.link)}
+    <motion.div
+      initial={{
+        opacity: 1,
+        y: -100,
+      }}
+      animate={{
+        y: projectModalOpen ? -100 : 0,
+        opacity: projectModalOpen ? 0 : 1,
+      }}
+      transition={{
+        duration: 0.2,
+      }}
+      className={cn(
+        "flex max-w-fit md:min-w-[70vw] lg:min-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-10 py-5 rounded-lg border border-black/.1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4",
+        projectModalOpen && "pointer-events-none",
+        className,
+      )}
+      style={{
+        backdropFilter: "blur(16px) saturate(180%)",
+        backgroundColor: "rgba(17, 25, 40, 0.75)",
+        borderRadius: "12px",
+        border: "1px solid rgba(255, 255, 255, 0.125)",
+      }}
+    >
+      {navItems.map((navItem, idx) => {
+        const isActive = activeLink === navItem.link;
+
+        return (
+          <Link
+            key={`link=${idx}`}
+            href={navItem.link}
+            onClick={(event) => handleNavClick(event, navItem.link)}
+            className={cn(
+              "relative flex items-center space-x-1 text-neutral-600 dark:text-neutral-50 dark:hover:text-neutral-300 hover:text-neutral-500",
+            )}
+          >
+            <span className="block sm:hidden">{navItem.icon}</span>
+            <span className="text-sm !cursor-pointer">{navItem.name}</span>
+            <span
               className={cn(
-                "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+                "absolute -bottom-2 left-1/2 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-purple transition-opacity",
+                isActive ? "opacity-100" : "opacity-0",
               )}
-            >
-              <span className="block sm:hidden">{navItem.icon}</span>
-              {/* add !cursor-pointer */}
-              {/* remove hidden sm:block for the mobile responsive */}
-              <span className=" text-sm !cursor-pointer">{navItem.name}</span>
-            </Link>
-          )
-        )}
-        {/* remove this login btn */}
-        {/* <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-          <span>Login</span>
-          <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-        </button> */}
-      </motion.div>
-    </AnimatePresence>
+            />
+          </Link>
+        );
+      })}
+    </motion.div>
   );
 };

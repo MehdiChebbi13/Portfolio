@@ -6,7 +6,7 @@ import MagicButton from "./ui/MagicButton";
 
 function Hero() {
   return (
-    <div className="pb-52 pt-36">
+    <section id="about" className="scroll-mt-32 pb-52 pt-36">
       <div>
         <Spotlight
           className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
@@ -58,7 +58,7 @@ function Hero() {
           </a>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 
